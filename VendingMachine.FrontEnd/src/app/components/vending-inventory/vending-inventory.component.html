@@ -1,0 +1,29 @@
+<h1>Inventory</h1>
+<section>
+  <div class="row">
+    <div class="column">
+      <label>Product Id:</label>
+      <input type="number" name="productId" [(ngModel)]="productId" placeholder="Enter product id"></div>
+    <div class="column">
+      <button (click)="getProduct()">Get Product</button>
+    </div>
+  </div>
+  <table *ngIf="product != null" class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Product Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Inventory</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ prodId }}</td>
+        <td>{{ prodName }} </td>
+        <td>{{ prodPrice | currency }}</td>
+        <td>{{ prodQuantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

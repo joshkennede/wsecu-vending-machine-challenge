@@ -27,6 +27,11 @@ namespace VendingMachine.Service
             return await repository.GetTransactionById(id);
         }
 
+        public async Task<List<Product>> GetProducts()
+        {
+            return await repository.GetProducts();
+        }
+
         public async Task<Product> GetProductById(int id)
         {
             return await repository.GetProductById(id);

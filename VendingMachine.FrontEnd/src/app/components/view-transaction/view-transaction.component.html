@@ -1,0 +1,29 @@
+<h1>Transaction Information</h1>
+<section>
+  <br />
+  <div *ngIf="transaction != null">
+    <label>Transaction Id: <span>{{ transId }}</span></label>
+    <label>Total Cost: <span>{{ transTotalCost | currency }}</span></label>
+    <label>Total Products: <span>{{ transTotalProducts }}</span></label>
+  </div>
+  <br />
+  <br />
+  <h3>Products</h3>
+  <table *ngIf="products.length > 0">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.quantity }}</td>
+    </tr>
+  </table>
+  <br />
+  <br />
+  <button (click)="goBack()">Go Back</button>
+</section>

@@ -51,6 +51,23 @@ namespace VendingMachine.Repository
                             Id = 3, Name = "Candy Bar", Price = 0.60m, Quantity = 1
                         },
                     }
+                },
+                new Transaction()
+                {
+                    Id = 2,
+                    TotalCost = 1.94m,
+                    TotalProducts = 2,
+                    Products = new List<Product>()
+                    {
+                        new Product()
+                        {
+                            Id = 1, Name = "Soda", Price = 0.95m, Quantity = 1
+                        },
+                        new Product()
+                        {
+                            Id = 2, Name = "Chips", Price = 0.99m, Quantity = 1
+                        }
+                    }
                 }
             };
         }
@@ -60,6 +77,17 @@ namespace VendingMachine.Repository
         
         public async Task<Transaction> GetTransactionById(int id)
             => ledger.Transactions.FirstOrDefault(w => w.Id == id);
+
+        public async Task<List<Product>> GetProducts()
+        {
+            var productIds = productInventory.Select(s => s.Key);
+            var products = new List<Product>();
+
+            foreach (var id in productIds)
+                products.Add(await GetProductById(id));
+            return products;
+        }
+            
 
         public async Task<Product> GetProductById(int id) => id switch
         {

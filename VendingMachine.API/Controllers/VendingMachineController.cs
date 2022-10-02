@@ -33,6 +33,14 @@ namespace VendingMachine.API.Controllers
         }
 
         [HttpGet]
+        [Route("product/")]
+        public async Task<IActionResult> GetProducts()
+        {
+            var products = vendingMachineService.GetProducts();
+            return Ok(products);
+        }
+
+        [HttpGet]
         [Route("product/{productId}/")]
         public async Task<IActionResult> GetInventoryForProductById(int productId)
         {
@@ -50,8 +58,9 @@ namespace VendingMachine.API.Controllers
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> RefundPurchase([FromBody]Transaction transaction)
+        public async Task<IActionResult> RefundPurchase([FromBody]int transactionId)
         {
+            var transaction = await vendingMachineService.GetTransactionById(transactionId);
             var isRefunded = vendingMachineService.RemoveTransactionFromLedger(transaction);
             return Ok(isRefunded);
         }

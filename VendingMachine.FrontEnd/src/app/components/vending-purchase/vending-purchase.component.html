@@ -1,0 +1,67 @@
+<h1>Purchase</h1>
+<div class="row">
+  <div class="column">
+    <table *ngIf="products.length > 0">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.quantity }}</td>
+        <td><button (click)="addProduct(product.id)">Add</button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="column">
+    <table *ngIf="purchasedProducts.length > 0">
+      <tr>
+        <th>Total Products</th>
+        <th>Total Price</th>
+      </tr>
+      <tr>
+        <td>{{ totalProducts }}</td>
+        <td>{{ totalPrice | currency }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="column">
+    <br />
+    <br />
+    <table *ngIf="purchasedProducts.length > 0">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let product of purchasedProducts">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.quantity }}</td>
+        <td><button (click)="removeProduct()">Remove</button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="column">
+    <br />
+    <br />
+    <table *ngIf="purchasedProducts.length > 0">
+      <tr>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <td>
+          <button (click)="buy()">Buy</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

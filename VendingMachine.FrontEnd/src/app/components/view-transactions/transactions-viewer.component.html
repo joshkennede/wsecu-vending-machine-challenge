@@ -1,0 +1,32 @@
+<h1>Transactions</h1>
+<section>
+  <button [routerLink]="['/vending/purchase']">New Purchase</button>
+  <br />
+  <button [routerLink]="['/vending/inventory']">View Inventory</button>
+  <br />
+  <div *ngIf="isRefunded">
+    <h3>Refund complete.</h3>
+  </div>
+  <div *ngIf="transactions.length === 0">
+    <h3>No Transactions to view</h3>
+  </div>
+  <table class="table table-bordered table-striped table-hover" *ngIf="transactions.length > 0">
+    <tr>
+      <th>Id</th>
+      <th>Total Cost</th>
+      <th>Total Products</th>
+      <th>Actions</th>
+    </tr>
+    <ng-container *ngFor="let transaction of transactions">
+      <tr>
+        <td>{{ transaction.id }}</td>
+        <td>{{ transaction.totalCost | currency }}</td>
+        <td>{{ transaction.totalProducts }}</td>
+        <td>
+          <button [routerLink]="['/transaction/', transaction.id]">View Transaction</button>
+          <button (click)="refundTransaction(transaction.id)">Refund Transaction</button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</section>
