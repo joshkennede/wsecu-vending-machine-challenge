@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VendingMachine.Repository.Models;
+﻿using VendingMachine.Repository.Models;
 
 namespace VendingMachine.Repository
 {
     public class VendingMachineRepository : IVendingMachineRepository
     {
+        #region Declarations
+
         private Ledger ledger;
         private Dictionary<int, int> productInventory;
+
+        #endregion
+
+        #region Constructor
 
         public VendingMachineRepository()
         {
@@ -20,12 +21,22 @@ namespace VendingMachine.Repository
             SeedProductInventory();
         }
 
+        #endregion
+
+        #region Test Methods
+
+        #region Seed product inventory into memory
+
         private void SeedProductInventory()
         {
             productInventory.Add(1, 10);
             productInventory.Add(2, 10);
             productInventory.Add(3, 10);
         }
+
+        #endregion
+
+        #region Seed some transaction data to the ledger in memory
 
         private void SeedLedgerData()
         {
@@ -72,6 +83,12 @@ namespace VendingMachine.Repository
             };
         }
 
+        #endregion
+
+        #endregion
+
+        #region Get Data
+
         public async Task<List<Transaction>> GetTransactions() 
             => ledger.Transactions;
         
@@ -87,7 +104,6 @@ namespace VendingMachine.Repository
                 products.Add(await GetProductById(id));
             return products;
         }
-            
 
         public async Task<Product> GetProductById(int id) => id switch
         {
@@ -96,6 +112,10 @@ namespace VendingMachine.Repository
             3 => new Product(3, "Candy Bar", 0.60m, await GetInventoryTotalForProduct(id)),
             _ => throw new NotImplementedException(),
         };
+
+        #endregion
+
+        #region Transform ledger
 
         public async Task AddTransactionToLedger(Transaction transaction)
         {
@@ -112,6 +132,10 @@ namespace VendingMachine.Repository
             var removedCount = ledger.Transactions.RemoveAll(r => r.Id == transaction.Id);
             return removedCount > 0;
         }
+
+        #endregion
+
+        #region Supporting Methods
 
         private async Task AddInventory(Transaction transaction)
         {
@@ -154,5 +178,7 @@ namespace VendingMachine.Repository
         {
             return productInventory[productId];
         }
+
+        #endregion
     }
 }

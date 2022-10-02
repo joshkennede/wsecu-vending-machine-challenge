@@ -9,12 +9,22 @@ namespace VendingMachine.API.Controllers
     [Produces("application/json")]
     public class VendingMachineController : ControllerBase
     {
+        #region Declaration
+
         private readonly VendingMachineService vendingMachineService;
+
+        #endregion
+
+        #region Constructor
 
         public VendingMachineController(VendingMachineService service)
         {
             vendingMachineService = service;
         }
+
+        #endregion
+
+        #region HTTP GET's
 
         [HttpGet]
         [Route("")]
@@ -48,6 +58,10 @@ namespace VendingMachine.API.Controllers
             return Ok(product);
         }
 
+        #endregion
+
+        #region HTTP POST's
+
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> RecordPurchase([FromBody]Transaction transaction)
@@ -55,6 +69,10 @@ namespace VendingMachine.API.Controllers
             vendingMachineService.AddTransactionToLedger(transaction);
             return Ok();
         }
+
+        #endregion
+
+        #region HTTP PUT's
 
         [HttpPut]
         [Route("")]
@@ -64,5 +82,7 @@ namespace VendingMachine.API.Controllers
             var isRefunded = vendingMachineService.RemoveTransactionFromLedger(transaction);
             return Ok(isRefunded);
         }
+
+        #endregion
     }
 }
