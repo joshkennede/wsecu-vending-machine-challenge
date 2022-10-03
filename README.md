@@ -12,7 +12,7 @@ After the dependencies are installed, run `npm run start` and navigate to 'http:
 # Ledger Functionality
 
 ## Requirement - 1: Record Purchase
-- This is complete on the backend side, I ran out time implenting on the front end.
+- This is complete on the backend side, I ran out time implementing on the front end.
   - Backend Endpoint: 
     - POST api/vendingmachine
   - Frontend URL: 
