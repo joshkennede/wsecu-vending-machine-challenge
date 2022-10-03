@@ -15,9 +15,10 @@ After the dependencies are installed, run `npm run start` and navigate to 'http:
 - This is complete on the backend side, I ran out time implenting on the front end.
   - Backend Endpoint: POST api/vendingmachine
   - Frontend URL: vending/purchase
-## Requirement - 2: Track remaining inventory of an item
-- This is complete on the backend and frontend.
+## Requirement - 2: Track remaining inventory of an item and all inventory
+- This is complete on the backend and frontend. There are two calls (one for a single inventory and one for all inventory)
   - Backend Endpoint: GET api/vendingmachine/product/{productId}
+  - Backend Endpoint: GET api/vendingmachine/product/
   - Frontend URL: vending/inventory
 ## Requirement - 3: Record refunds of a transaction
 - This is complete on the backend and frontend.
